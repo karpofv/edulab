@@ -1,119 +1,103 @@
-<div id="page-wrapper" class="gray-bg dashbard-1">
-    <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-minimalize minimalize-styl-2 btn btn-warning " href="#"><i class="fa fa-bars"></i> </a>
+<div id="loader"></div>
+<div class="loader-section section-left"></div>
+<div class="loader-section section-right"></div>
+</div>
+<!-- End Page Loading -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START HEADER -->
+<header id="header" class="page-topbar">
+    <!-- start header nav-->
+    <div class="navbar-fixed">
+        <nav class="navbar-color gradient-45deg-purple-deep-orange gradient-shadow">
+            <div class="nav-wrapper">
+                <div class="header-search-wrapper hide-on-med-and-down sideNav-lock"> <i class="material-icons">search</i>
+                    <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize" /> </div>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light translation-button" data-activates="translation-dropdown"> <span class="flag-icon flag-icon-gb"></span> </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"> <i class="material-icons">settings_overscan</i> </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown"> <i class="material-icons">notifications_none
+                    <small class="notification-badge">5</small>
+                  </i> </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown"> <span class="avatar-status avatar-online">
+                    <img src="<?php echo $ruta_base;?>/assets/img/avatar/<?php echo $_SESSION[ci]?>.jpg" alt="avatar">
+                    <i></i>
+                  </span> </a>
+                    </li>
+                    <li>
+                        <a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse"> <i class="material-icons">format_indent_increase</i> </a>
+                    </li>
+                </ul>
+                <!-- translation-button -->
+                <ul id="translation-dropdown" class="dropdown-content">
+                    <li>
+                        <a href="#!" class="grey-text text-darken-1"> <i class="flag-icon flag-icon-gb"></i> English</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-1"> <i class="flag-icon flag-icon-fr"></i> French</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-1"> <i class="flag-icon flag-icon-cn"></i> Chinese</a>
+                    </li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-1"> <i class="flag-icon flag-icon-de"></i> German</a>
+                    </li>
+                </ul>
+                <!-- notifications-dropdown -->
+                <ul id="notifications-dropdown" class="dropdown-content">
+                    <li>
+                        <h6>NOTIFICATIONS
+                  <span class="new badge">5</span>
+                </h6> </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
+                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
+                    </li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle red small">stars</span> Completed the task</a>
+                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">3 days ago</time>
+                    </li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle teal small">settings</span> Settings updated</a>
+                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">4 days ago</time>
+                    </li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle deep-orange small">today</span> Director meeting started</a>
+                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">6 days ago</time>
+                    </li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle amber small">trending_up</span> Generate monthly report</a>
+                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
+                    </li>
+                </ul>
+                <!-- profile-dropdown -->
+                <ul id="profile-dropdown" class="dropdown-content">
+                    <li>
+                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">face</i> Profile</a>
+                    </li>
+                    <li>
+                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">settings</i> Settings</a>
+                    </li>
+                    <li>
+                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">live_help</i> Help</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">lock_outline</i> Lock</a>
+                    </li>
+                    <li>
+                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">keyboard_tab</i> Logout</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <span class="m-r-sm text-muted welcome-message">Bienvenido al sistema de gestión de comision asesora</span>
-                </li>
-                <!--<li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a7.jpg">
-                                </a>
-                                <div class="media-body">
-                                    <small class="pull-right">46h ago</small>
-                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a4.jpg">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right text-navy">5h ago</small>
-                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/profile.jpg">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right">23h ago</small>
-                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="mailbox.html">
-                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="mailbox.html">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="grid_options.html">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="notifications.html">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>-->
-                <li>
-                    <a href="control.php?info=4">
-                        <i class="fa fa-sign-out"></i> Salir
-                    </a>
-                </li>
-                <li>
-                    <a class="right-sidebar-toggle">
-                        <i class="fa fa-tasks"></i>
-                    </a>
-                </li>
-            </ul>
-
         </nav>
     </div>
+</header>
+<!-- END HEADER -->
