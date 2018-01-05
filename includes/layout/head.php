@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
-    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
-    <title>Materialize - Material Design Admin Template</title>
-    <!-- Favicons-->
-    <link rel="icon" href="<?php echo $ruta_base;?>/assets/img/favicon/favicon-32x32.png" sizes="32x32">
-    <!-- CORE CSS-->
-    <link href="<?php echo $ruta_base;?>/assets/css/themes/collapsible-menu/materialize.css" type="text/css" rel="stylesheet">
-    <link href="<?php echo $ruta_base;?>/assets/css/themes/collapsible-menu/style.css" type="text/css" rel="stylesheet">
-    <!-- Custome CSS-->
-    <link href="<?php echo $ruta_base;?>/assets/css/custom/custom.css" type="text/css" rel="stylesheet">
-    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-    <link href="<?php echo $ruta_base;?>/assets/vendors/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet">
-    <link href="<?php echo $ruta_base;?>/assets/vendors/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet">
-    <link href="<?php echo $ruta_base;?>/assets/vendors/flag-icon/css/flag-icon.min.css" type="text/css" rel="stylesheet"> </head>
+<!-- Meta -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="keywords" content="MediaCenter, Template, eCommerce">
+<meta name="robots" content="all">
+<title>Ventas</title>
 
-<body>
-    <!-- Start Page Loading -->
-    <div id="loader-wrapper">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="<?php echo $ruta_base;?>/assets/css/bootstrap.min.css">
+
+<!-- Customizable CSS -->
+<link rel="stylesheet" href="<?php echo $ruta_base;?>/assets/css/main.css">
+<link rel="stylesheet" href="<?php echo $ruta_base;?>/assets/css/blue.css">
+<link rel="stylesheet" href="<?php echo $ruta_base;?>/assets/css/owl.carousel.css">
+<link rel="stylesheet" href="<?php echo $ruta_base;?>/assets/css/owl.transitions.css">
+<link rel="stylesheet" href="<?php echo $ruta_base;?>/assets/css/animate.min.css">
+<link rel="stylesheet" href="<?php echo $ruta_base;?>/assets/css/rateit.css">
+<link rel="stylesheet" href="<?php echo $ruta_base;?>/assets/css/bootstrap-select.min.css">
+
+<!-- Icons/Glyphs -->
+<link rel="stylesheet" href="<?php echo $ruta_base;?>/assets/css/font-awesome.css">
+
+<!-- Fonts -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+</head>
+<body class="cnt-home">

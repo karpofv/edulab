@@ -1,103 +1,173 @@
-<div id="loader"></div>
-<div class="loader-section section-left"></div>
-<div class="loader-section section-right"></div>
-</div>
-<!-- End Page Loading -->
-<!-- //////////////////////////////////////////////////////////////////////////// -->
-<!-- START HEADER -->
-<header id="header" class="page-topbar">
-    <!-- start header nav-->
-    <div class="navbar-fixed">
-        <nav class="navbar-color gradient-45deg-purple-deep-orange gradient-shadow">
-            <div class="nav-wrapper">
-                <div class="header-search-wrapper hide-on-med-and-down sideNav-lock"> <i class="material-icons">search</i>
-                    <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize" /> </div>
-                <ul class="right hide-on-med-and-down">
-                    <li>
-                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light translation-button" data-activates="translation-dropdown"> <span class="flag-icon flag-icon-gb"></span> </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"> <i class="material-icons">settings_overscan</i> </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown"> <i class="material-icons">notifications_none
-                    <small class="notification-badge">5</small>
-                  </i> </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown"> <span class="avatar-status avatar-online">
-                    <img src="<?php echo $ruta_base;?>/assets/img/avatar/<?php echo $_SESSION[ci]?>.jpg" alt="avatar">
-                    <i></i>
-                  </span> </a>
-                    </li>
-                    <li>
-                        <a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse"> <i class="material-icons">format_indent_increase</i> </a>
-                    </li>
-                </ul>
-                <!-- translation-button -->
-                <ul id="translation-dropdown" class="dropdown-content">
-                    <li>
-                        <a href="#!" class="grey-text text-darken-1"> <i class="flag-icon flag-icon-gb"></i> English</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="grey-text text-darken-1"> <i class="flag-icon flag-icon-fr"></i> French</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="grey-text text-darken-1"> <i class="flag-icon flag-icon-cn"></i> Chinese</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="grey-text text-darken-1"> <i class="flag-icon flag-icon-de"></i> German</a>
-                    </li>
-                </ul>
-                <!-- notifications-dropdown -->
-                <ul id="notifications-dropdown" class="dropdown-content">
-                    <li>
-                        <h6>NOTIFICATIONS
-                  <span class="new badge">5</span>
-                </h6> </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
-                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
-                    </li>
-                    <li>
-                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle red small">stars</span> Completed the task</a>
-                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">3 days ago</time>
-                    </li>
-                    <li>
-                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle teal small">settings</span> Settings updated</a>
-                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">4 days ago</time>
-                    </li>
-                    <li>
-                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle deep-orange small">today</span> Director meeting started</a>
-                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">6 days ago</time>
-                    </li>
-                    <li>
-                        <a href="#!" class="grey-text text-darken-2"> <span class="material-icons icon-bg-circle amber small">trending_up</span> Generate monthly report</a>
-                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
-                    </li>
-                </ul>
-                <!-- profile-dropdown -->
-                <ul id="profile-dropdown" class="dropdown-content">
-                    <li>
-                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">face</i> Profile</a>
-                    </li>
-                    <li>
-                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">settings</i> Settings</a>
-                    </li>
-                    <li>
-                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">live_help</i> Help</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">lock_outline</i> Lock</a>
-                    </li>
-                    <li>
-                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">keyboard_tab</i> Logout</a>
-                    </li>
-                </ul>
+<header class="header-style-1">
+    <!-- ============================================== TOP MENU ============================================== -->
+    <div class="top-bar animate-dropdown">
+        <div class="container">
+            <div class="header-top-inner">
+                <div class="cnt-account">
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="icon fa fa-user"></i>Mi cuenta</a></li>
+                        <li><a href="#"><i class="icon fa fa-heart"></i>Favoritos</a></li>
+                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>Mi carrito</a></li>
+                        <li><a href="#"><i class="icon fa fa-check"></i>Facturar</a></li>
+                        <li><a href="control.php?info=4"><i class="icon fa fa-lock"></i>Salir</a></li>
+                    </ul>
+                </div>
+                <!-- /.cnt-account -->
+<?php /*
+                <div class="cnt-block">
+                    <ul class="list-unstyled list-inline">
+                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">USD</a></li>
+                                <li><a href="#">INR</a></li>
+                                <li><a href="#">GBP</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">English </span><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">English</a></li>
+                                <li><a href="#">French</a></li>
+                                <li><a href="#">German</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- /.list-unstyled -->
+                </div>
+                <!-- /.cnt-cart -->
+                */
+?>
+                <div class="clearfix"></div>
             </div>
-        </nav>
+            <!-- /.header-top-inner -->
+        </div>
+        <!-- /.container -->
     </div>
+    <!-- /.header-top -->
+    <!-- ============================================== TOP MENU : END ============================================== -->
+    <div class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
+                    <!-- ============================================================= LOGO ============================================================= -->
+                    <div class="logo">
+                        <a href="control.php"> <img src="<?php echo $ruta_base;?>/assets/images/ventas.jpg" alt="logo" width="200px"> </a>
+                    </div>
+                    <!-- /.logo -->
+                    <!-- ============================================================= LOGO : END ============================================================= -->
+                </div>
+                <!-- /.logo-holder -->
+
+                <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
+                    <!-- /.contact-row -->
+                    <!-- ============================================================= SEARCH AREA ============================================================= -->
+                    <div class="search-area">
+                        <form>
+                            <div class="control-group">
+                                <ul class="categories-filter animate-dropdown">
+                                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="category.html">Categorias <b class="caret"></b></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li class="menu-header">Computadores</li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">- Ropa</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">- Electrónicos</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">- Zapatos</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">- Relojes</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <input class="search-field" placeholder="" />
+                                <a class="search-button" href="#"></a>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.search-area -->
+                    <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+                </div>
+                <!-- /.top-search-holder -->
+
+                <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
+                    <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+
+                    <div class="dropdown dropdown-cart">
+                        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+                            <div class="items-cart-inner">
+                                <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
+                                <div class="basket-item-count"><span class="count">2</span></div>
+                                <div class="total-price-basket"> <span class="lbl"></span> <span class="total-price"> <span class="sign">$</span><span class="value">600.00</span> </span>
+                                </div>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="cart-item product-summary">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <div class="image">
+                                                <a href="detail.html"><img src="<?php echo $ruta_base;?>/assets/images/cart.jpg" alt=""></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <h3 class="name"><a href="index8a95.html?page-detail">Productos</a></h3>
+                                            <div class="price">$600.00</div>
+                                        </div>
+                                        <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
+                                    </div>
+                                </div>
+                                <!-- /.cart-item -->
+                                <div class="clearfix"></div>
+                                <hr>
+                                <div class="clearfix cart-total">
+                                    <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'>$600.00</span> </div>
+                                    <div class="clearfix"></div>
+                                    <a href="javascript:void(0)" class="btn btn-upper btn-primary btn-block m-t-20">Facturar</a> </div>
+                                <!-- /.cart-total-->
+
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-menu-->
+                    </div>
+                    <!-- /.dropdown-cart -->
+
+                    <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+                </div>
+                <!-- /.top-cart-row -->
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.main-header -->
+
+    <!-- ============================================== NAVBAR ============================================== -->
+    <div class="header-nav animate-dropdown">
+        <div class="container">
+            <div class="yamm navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button"> 
+       <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                </div>
+                <div class="nav-bg-class">
+                    <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
+                        <div class="nav-outer">
+                            <!-- /.navbar-nav -->
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- /.nav-outer -->
+                    </div>
+                    <!-- /.navbar-collapse -->
+
+                </div>
+                <!-- /.nav-bg-class -->
+            </div>
+            <!-- /.navbar-default -->
+        </div>
+        <!-- /.container-class -->
+
+    </div>
+    <!-- /.header-nav -->
+    <!-- ============================================== NAVBAR : END ============================================== -->
 </header>
-<!-- END HEADER -->
+<div class="body-content outer-top-xs" id="top-banner-and-menu">
+    <div class="container">
+        <div class="row">

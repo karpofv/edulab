@@ -17,10 +17,10 @@ Class Menu {
                 $submenuli = $submenu['subm_descripcion'];
             }
 ?>
-            <li class="li-sub">
-                <a href="#" title="<?php echo $submenu['subm_descripcion']; ?>" style="color: white;" onclick="controler('dmn=<?php echo $submenu['subm_codigo'];?>&ver=1', 'verContenido')">
-                    <i class="<?php echo $submenu[subm_icono]?>"></i>
-                    <span><?php echo $submenuli; ?></span>
+            <li>
+                <a href="#" onclick="controler('dmn=<?php echo $submenu['subm_codigo'];?>&ver=2', 'verContenido');">
+                    <i class="icon fa <?php echo $submenu[subm_icono]?>"></i>
+                    <span><?php echo $submenuli;?></span>
                 </a>
                 <?php
                 Menu::submenu($codigo, $nivel, $submenu['subm_codigo']);
@@ -42,17 +42,22 @@ Class Menu {
               $menuli = $menu['menu_descripcion'];
             }
             ?>
-        <li>
-            <a href="#" title="<?php echo $menu['menu_descripcion']; ?>">
-                <i class="<?php echo $menu[menu_icono]?>"></i>
-                <span class="nav-label sp-princ"><?php echo $menuli; ?></span><span class="fa arrow sp-princ"></span>
-            </a>
-            <ul class="nav nav-second-level collapse">
-                <?php
-                    Menu::submenu($menu['menu_codigo'], 0, 0);
-                ?>
-            </ul>
+<li class="dropdown menu-item"> 
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon <?php echo $menu['menu_icono']?>" aria-hidden="true"></i><?php echo $menuli;?></a>
+    <ul class="dropdown-menu mega-menu">
+        <li class="yamm-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="links list-unstyled">        
+                        <?php
+            Menu::submenu($menu['menu_codigo'], 0, 0);
+                        ?>
+                    </ul>
+                </div>
+            </div>
         </li>
+    </ul>
+</li>
 
         <?php
         }

@@ -2,14 +2,18 @@
     error_reporting(E_ALL);
     ini_set('display_errors', false);
     ini_set('display_startup_errors', false);
-
     require("../includes/conf/parametros.php");
     require("../includes/conf/firewall.php");
     require("../includes/conexion.php");
     require("../includes/tools.php");
     require("../includes/combos.php");
     require("clases/class.menu.php");
-
+    $FOTO = paraTodos::url_exists($ruta_base."/assets/img/avatar/$_SESSION[ci].jpg");
+    if($FOTO=="true"){
+        $FOTO = $_SESSION['ci'].".jpg";   
+    } else {
+        $FOTO = "avatar.jpg";
+    }
     $idMenu = $_POST[dmn];
     $idSubMenu = $_POST[ver];
     $act = $_POST[act];
