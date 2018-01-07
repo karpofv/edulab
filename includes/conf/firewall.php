@@ -25,7 +25,6 @@ if (isset($user) && isset($pass) && ($user!='') && ($pass!='')) {
         // almacenamos datos del Usuario en un array para empezar a chequear.
         $usuario_datos = $usuario_consulta->fetch(PDO::FETCH_ASSOC);
         // liberamos la memoria usada por la consulta, ya que tenemos estos datos en el Array.
-        $usuario_consulta->closeCursor();
         if ($login != $usuario_datos['Usuario']) {
             Header("Location: $redir?info=1");
             exit;
@@ -36,15 +35,24 @@ if (isset($user) && isset($pass) && ($user!='') && ($pass!='')) {
             Header("Location: $redir?info=1");
             exit;
         }
+        /*Se obtiene el codigo de la persona*/
+    $conexion = new Conexion();
+    $conectar = $conexion->obtenerConexionMy();
+        $personal_consulta = $conectar->prepare("SELECT per_codigo FROM persona WHERE per_cedula=$usuario_datos[Cedula]");
+        $personal_consulta->execute();
+        $persona_datos = $personal_consulta->fetch(PDO::FETCH_ASSOC);
         session_start();
         session_cache_limiter('nocache,private');
         $_SESSION['usuario_tipo'] = $usuario_datos['Tipo'];
         $_SESSION['ci'] = $usuario_datos['Cedula'];
+        $_SESSION['codido_persona'] = $persona_datos['per_codigo'];
         $_SESSION['usuario_password']  = $usuario_datos['contrasena'];
         $_SESSION['user_pass_ne'] = $pass;
         $_SESSION['usuario_perfil'] = $usuario_datos['Nivel'];
         $_SESSION['usuario_stilo']=$usuario_datos['Stilo'];
         $_SESSION['imgperfil']=$usuario_datos['Img_perfil'];
+        $usuario_consulta->closeCursor();
+        $personal_consulta->closeCursor();
         //Verificacion de los permisos de lectura escritura
         $pag = $_SERVER['PHP_SELF'];
         Header("Location: $pag");

@@ -10,220 +10,92 @@
         $nombre_pefil=$row['perf_descripcion'];
     }
 ?>
-    <div class="row-fluid" style="background: #FFFFFF;margin: 10px auto 10px auto;width: 100%;">
-        <div class="span12">
-            <!-- BEGIN BASIC PORTLET-->
-            <div class="widget blue">
-                <div style="color: #A50000;width: 100%;padding: 8px 0px 8px 7px; height: auto;font-weight: bold;overflow: hidden;font-size: 11pt;border: 1px solid #DDDDDD;background: #FAFAFA;;">
-                    <h4>
-                        <i class="icon-reorder"></i>  Configuraci&oacute;n del Perfil <b> (<?php echo $nombre_pefil; ?>)</b>
-                    </h4> <a style="float:right;margin-right: 15px;margin-top: -10px;" onclick="var msg = confirm('Esta seguro que desea eliminar este Perfil?');
-                    if (msg) {controler('ver=2&eliminar=<?php echo $_POST[idperfil]?>&dmn=<?php echo $dmn; ?>','verContenido');} return false;" href="javascript:void(0);">Eliminar el Perfil</a> </div>
-                <div class="widget-body">
-                    <table class="table table-bordered table-striped" style="width: 100%;" border="0">
-                        <?php
+    <div class="contenedor-formulario">
+        <div class="wrap">
+            <h5>
+                <i class="icon-reorder"></i> Configuración del Perfil <b> (<?php echo $nombre_pefil; ?>)</b>
+            </h5>
+            <a style="float:right;margin-right: 15px;margin-top: -10px;" onclick="var msg = confirm('Esta seguro que desea eliminar este Perfil?');
+                    if (msg) {controler('ver=2&eliminar=<?php echo $_POST[idperfil]?>&dmn=<?php echo $dmn; ?>','verContenido');} return false;" href="javascript:void(0);">Eliminar el Perfil</a>
+            <div class="widget-body">
+                <table class="table">
+<?php
                     $indicemenu=1;
                     $resultx=paraTodos::arrayConsulta("*", "menu","1=1 order by menu_codigo" );
                     foreach ($resultx as $row) {
-                        $indicesubmenu=1;
-                        $idmenus=$row["menu_codigo"];
-                        $menu=$row["menu_descripcion"];
 ?>
-                            <tr style="background: #EEEEEE;font-weight: bold;font-size: 13px;">
-                                <td class="CeldaRecojeDatos" height="20">
-                                    <?php
-                              if ($_POST[idperfil]<>''){
-                                //Se busca los menus que ya tenga ese perfil, si existen se chequean
-                                $consulta_menu_perfiles=paraTodos::arrayConsulta("perdet_menucodigo,perdet_I,perdet_S,perdet_U,perdet_D,perdet_P", "perfiles_det", "perdet_perfcodigo=$_POST[idperfil]");
-                                foreach($consulta_menu_perfiles as $resultado){
-                                    $menu_del_perfil=$resultado["perdet_menucodigo"];
-                                    $insertar=$resultado["perdet_I"];
-                                    $modificar=$resultado["perdet_U"];
-                                    $consultar=$resultado["perdet_S"];
-                                    $eliminar=$resultado["perdet_D"];
-                                    $imprimir=$resultado["perdet_P"];
-                                    if  ($idmenus==$menu_del_perfil){
-                                        $idmenu= "true";
-                                    }
-                                }
-                            }
+                    <tr style="background: #EEEEEE;font-weight: bold;font-size: 13px;">
+                        <td class="CeldaRecojeDatos" height="20">
+                            <span style="width: 350px;font-weight: 800;color: #000000;"><b><?php echo $row["menu_descripcion"];?></b></span>
+                        </td>
+                        <td style="padding: 5px;font-weight: 700;color: #333333;">Consultar</td>
+                        <td style="padding: 5px;font-weight: 700;color: #333333;">Insertar</td>
+                        <td style="padding: 5px;font-weight: 700;color: #333333;">Modificar</td>
+                        <td style="padding: 5px;font-weight: 700;color: #333333;">Eliminar</td>
+                        <td style="padding: 5px;font-weight: 700;color: #333333;">Imprimir</td>
+                    </tr>
+                    <?php
+                        $submenu=paraTodos::arrayConsulta("*", "menu_submenu","subm_menucodigo=$row[menu_codigo] order by subm_codigo" );
+                        foreach($submenu as $resultado){
 ?>
-                                    <span style="width: 350px;font-weight: 800;color: #000000;"><b><?php echo $menu;?></b></span> </td>
-                                <td style="padding: 5px;font-weight: 700;color: #333333;">Consultar</td>
-                                <td style="padding: 5px;font-weight: 700;color: #333333;">Insertar</td>
-                                <td style="padding: 5px;font-weight: 700;color: #333333;">Modificar</td>
-                                <td style="padding: 5px;font-weight: 700;color: #333333;">Eliminar</td>
-                                <td style="padding: 5px;font-weight: 700;color: #333333;">Imprimir</td>
-                            </tr>
-                            <tr>
-                                <div id="idmenuPert">
-                                    <?php
-                            $resultxw=paraTodos::arrayConsulta("*", "menu_submenu","subm_menucodigo='$idmenus' order by subm_menucodigo");
-                            foreach ($resultxw as $roww){
-                                $submenu1=$roww["subm_descripcion"];
-                                $submenuID=$roww["subm_codigo"];
-                                $submenuconexion=$roww["subm_menucodigo"];
-                                $idSubMenuP='';
-                                $psubMenu1="<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                $psubMenu2="<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                $psubMenu3="<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                $psubMenu4="<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                $psubMenu5="<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                $contc=$contc+1;
-                                if($contc=="1"){
-                                    echo "	<tr class=\"item_claro\">";
-                                    $color="#F6F6F6";
-                                }else{
-                                    echo "	<tr class=\"item_oscuro\">";
-                                    $color="#FFFFFF";
-                                    $contc="0";
-                                }
-?>
-                                        <td class="CeldaRecojeDatos" height="20" style="padding: 5px;">
-                                            <?php
-                                $entre='';
-                                if ($_POST[idperfil]<>'') {
-                                    $consulta_sub_menu_perfiles=paraTodos::arrayConsulta("*", "perfiles_det", "perdet_submcodigo='$submenuID' and perdet_menucodigo='$idmenus' and perdet_perfcodigo = $_POST[idperfil]");
-                                    foreach($consulta_sub_menu_perfiles as $resultado2){
-                                        $submen=$resultado2["perdet_submcodigo"];
-                                        $menu_del_perfil=$resultado["perdet_menucodigo"];
-                                        $idSubMenuP=$resultado2["perdet_codigo"];
-                                           $entre='1';
-                                        $consultar=$resultado2["perdet_S"];
-                                        if  ($consultar==1){
-                                            $psubMenu1= "<i style='color: #36be00;' class='glyphicon glyphicon-check'></i>";
-                                            $accC=0;
-                                        }
-                                        if  ($consultar==0){
-                                            $psubMenu1= "<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                            $accC=1;
-                                        }
-                                        $insertar=$resultado2["perdet_I"];
-                                        if  ($insertar==1){
-                                            $psubMenu2= "<i style='color: #36be00;' class='glyphicon glyphicon-check'></i>";
-                                            $accI=0;
-                                        }
-                                        if  ($insertar==0){
-                                            $psubMenu2= "<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                            $accI=1;
-                                        }
-                                        $modificar=$resultado2["perdet_U"];
-                                        if  ($modificar==1){
-                                            $psubMenu3= "<i style='color: #36be00;' class='glyphicon glyphicon-check'></i>";
-                                            $accM=0;
-                                        }
-                                        if  ($modificar==0){
-                                            $psubMenu3= "<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                            $accM=1;
-                                        }
-                                        $eliminar=$resultado2["perdet_D"];
-                                        if  ($eliminar==1){
-                                            $psubMenu4= "<i style='color: #36be00;' class='glyphicon glyphicon-check'></i>";
-                                            $accE=0;
-                                        }
-                                        if  ($eliminar==0){
-                                            $psubMenu4= "<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                            $accE=1;
-                                        }
-                                        $imprimir=$resultado2["perdet_P"];
-                                        if  ($imprimir==1){
-                                            $psubMenu5= "<i style='color: #36be00;' class='glyphicon glyphicon-check'></i>";
-                                            $accImp=0;
-                                        }
-                                        if  ($imprimir==0){
-                                            $psubMenu5= "<i style='color: #FF0000;' class='glyphicon glyphicon-remove'></i>";
-                                            $accImp=1;
-                                        }
-                                    }
-                                }
-                                if ($entre=='') {
-                                    $accC=1; $accI=1;$accM=1;$accE=1;$accImp=1;
-                                }
-                                if ($idSubMenuP=='') {
-                                    $idSubMenuP=$submenuID;
-                                }
-                                if($submenuID==$submen){
-?> <font style="color:blue; font-weight:bold;">
+                    <tr>
+                        <td><?php echo $resultado[subm_descripcion];?></td>
 <?php
-                                }
-                                echo $submenu1;
-                                if($submenuID==$submen){
+                        $icon_s="close";
+                        $icon_u="close";
+                        $icon_d="close";
+                        $icon_i="close";
+                        $icon_p="close";
+                        $color_s="red";                            
+                        $color_u="red";
+                        $color_d="red";
+                        $color_i="red";
+                        $color_p="red";
+                        $acc_s="0";
+                        $acc_u="0";
+                        $acc_d="0";
+                        $acc_i="0";
+                        $acc_p="0";
+                        $consulpermisos = paraTodos::arrayConsulta("*", "perfiles_det pd", "pd.perdet_perfcodigo=$_POST[idperfil] and pd.perdet_menucodigo=$row[menu_codigo] and pd.perdet_submcodigo=$resultado[subm_codigo]");
+                        foreach($consulpermisos as $permisos){
+                            if($permisos[perdet_S]!="" and $permisos[perdet_S]!=0){$icon_s="check"; $color_s="green"; $acc_s=1;} else {$icon_s="close"; $color_s="red"; $acc_s=0;}
+                            if($permisos[perdet_U]!="" and $permisos[perdet_U]!=0){$icon_u="check"; $color_u="green"; $acc_u=1;} else {$icon_u="close"; $color_u="red"; $acc_u=0;}
+                            if($permisos[perdet_D]!="" and $permisos[perdet_D]!=0){$icon_d="check"; $color_d="green"; $acc_d=1;} else {$icon_d="close"; $color_d="red"; $acc_d=0;}
+                            if($permisos[perdet_I]!="" and $permisos[perdet_I]!=0){$icon_i="check"; $color_i="green"; $acc_i=1;} else {$icon_i="close"; $color_i="red"; $acc_i=0;}
+                            if($permisos[perdet_P]!="" and $permisos[perdet_P]!=0){$icon_p="check"; $color_p="green"; $acc_p=1;} else {$icon_p="close"; $color_p="red"; $acc_p=0;}
+                        }
 ?>
-                                </font>
-                                                <?php
-                                }
-?>
-                                        </td>
-                                        <td id="consultartd<?php echo $idSubMenuP; ?>" class="CeldaRecojeDatos" height="20">
-                                            <?php
-                                    if ($accPermisos['S']==1 AND $accPermisos['I']==1 AND $accPermisos['U']==1 AND $accPermisos['D']==1) { ?>
-                                                <a title="<?php echo 'Seleccionar '.$menu.'('.$submenu1.')'; ?>" onclick="controler('act=3&ver=2&dmn=<?php echo $idMenu;?>&idsubmenupp=<?php echo $idSubMenuP; ?>&accC=<?php echo $accC; ?>&permiso=1&submenu=<?php echo $submenuID; ?>&menus=<?php echo $idmenus; ?>&idperfil=<?php echo $_POST[idperfil]; ?>','consultartd<?php echo $idSubMenuP; ?>');return false;" href="javascript:void(0);">
-                                                    <?php echo $psubMenu1; ?>
-                                                </a>
-                                                <?php
-                                    }else{
-                                        echo $psubMenu1;
-                                    }
-?>
-                                        </td>
-                                        <td id="insertartd<?php echo $idSubMenuP; ?>" class="CeldaRecojeDatos" height="20">
-                                            <?php
-                                    if ($accPermisos['S']==1 AND $accPermisos['I']==1 AND $accPermisos['U']==1 AND $accPermisos['D']==1) { ?>
-                                                <a title="<?php echo 'Seleccionar '.$menu.'('.$submenu1.')'; ?>" onclick="controler('act=3&ver=2&dmn=<?php echo $idMenu;?>&idsubmenupp=<?php echo $idSubMenuP; ?>&accI=<?php echo $accI; ?>&permiso=1&submenu=<?php echo $submenuID; ?>&menus=<?php echo $idmenus; ?>&idperfil=<?php echo $_POST[idperfil]; ?>','insertartd<?php echo $idSubMenuP; ?>'); return false;" href="javascript:void(0);">
-                                                    <?php echo $psubMenu2; ?>
-                                                </a>
-                                                <?php
-                                    }else{
-                                        echo $psubMenu1;
-                                    }
-?>
-                                        </td>
-                                        <td id="modificartd<?php echo $idSubMenuP; ?>" class="CeldaRecojeDatos" height="20">
-                                            <?php
-                                    if ($accPermisos['S']==1 AND $accPermisos['I']==1 AND $accPermisos['U']==1 AND $accPermisos['D']==1) { ?>
-                                                <a title="<?php echo 'Seleccionar '.$menu.'('.$submenu1.')'; ?>" onclick="controler('act=3&ver=2&dmn=<?php echo $idMenu;?>&idsubmenupp=<?php echo $idSubMenuP; ?>&accM=<?php echo $accM; ?>&permiso=1&submenu=<?php echo $submenuID; ?>&menus=<?php echo $idmenus; ?>&idperfil=<?php echo $_POST[idperfil]; ?>','modificartd<?php echo $idSubMenuP; ?>'); return false;" href="javascript:void(0);">
-                                                    <?php echo $psubMenu3; ?>
-                                                </a>
-                                                <?php
-                                    }else{
-                                        echo $psubMenu3;
-                                    }
-?>
-                                        </td>
-                                        <td id="eliminartd<?php echo $idSubMenuP; ?>" class="CeldaRecojeDatos" height="20">
-                                            <?php
-                                    if ($accPermisos['S']==1 AND $accPermisos['I']==1 AND $accPermisos['U']==1 AND $accPermisos['D']==1) { ?>
-                                                <a title="<?php echo 'Seleccionar '.$menu.'('.$submenu1.')'; ?>" onclick="controler('act=3&ver=2&dmn=<?php echo $idMenu;?>&idsubmenupp=<?php echo $idSubMenuP; ?>&accE=<?php echo $accE; ?>,permiso=1&submenu=<?php echo $submenuID; ?>&menus=<?php echo $idmenus; ?>&idperfil=<?php echo $_POST[idperfil]; ?>','eliminartd<?php echo $idSubMenuP; ?>');  return false;" href="javascript:void(0);">
-                                                    <?php echo $psubMenu4; ?>
-                                                </a>
-                                                <?php
-                                    }else{
-                                        echo $psubMenu4;
-                                    }
-?>
-                                        </td>
-                                        <td id="imprimirtd<?php echo $idSubMenuP; ?>" class="CeldaRecojeDatos" height="20">
-                                            <?php
-                                    if ($accPermisos['S']==1 AND $accPermisos['I']==1 AND $accPermisos['U']==1 AND $accPermisos['D']==1) { ?>
-                                                <a title="<?php echo 'Seleccionar '.$menu.'('.$submenu1.')'; ?>" onclick="controler('act=3&ver=2&dmn=<?php echo $idMenu;?>&idsubmenupp=<?php echo $idSubMenuP; ?>&accImp=<?php echo $accImp; ?>&permiso=1&submenu=<?php echo $submenuID; ?>&menus=<?php echo $idmenus; ?>&idperfil=<?php echo $_POST[idperfil]; ?>','imprimirtd<?php echo $idSubMenuP; ?>'); return false;" href="javascript:void(0);">
-                                                    <?php echo $psubMenu5; ?>
-                                                </a>
-                                                <?php
-                                    }else{
-                                        echo $psubMenu5;
-                                    }
-?>
-                                        </td>
-                                        <?php
-                            }
-?>
-                                </div>
-                            </tr>
-                            <?php
+                        <td id="td_<?php echo $permisos[perdet_codigo]?>_s">
+                            <a href="javascript:void(0);" onclick="controler('ver=1&dmn=<?php echo $idMenu;?>&act=3&codigo=<?php echo $permisos[perdet_codigo]?>&acc=<?php echo $acc_s;?>&perm=s&submen=<?php echo $resultado[subm_codigo]?>&perf=<?php echo $_POST[idperfil];?>&menu=<?php echo $row[menu_codigo];?>','td_<?php echo $permisos[perdet_codigo]?>_s','')">
+                                <i class="material-icons" style="color:<?php echo $color_s;?>"><?php echo $icon_s;?></i>    
+                            </a>
+                        </td>
+                        <td id="td_<?php echo $permisos[perdet_codigo]?>_u">
+                            <a href="javascript:void(0);" onclick="controler('ver=1&dmn=<?php echo $idMenu;?>&act=3&codigo=<?php echo $permisos[perdet_codigo]?>&acc=<?php echo $acc_u;?>&perm=u&submen=<?php echo $resultado[subm_codigo]?>&perf=<?php echo $_POST[idperfil];?>&menu=<?php echo $row[menu_codigo];?>','td_<?php echo $permisos[perdet_codigo]?>_u','')">
+                                <i class="material-icons" style="color:<?php echo $color_u;?>"><?php echo $icon_u;?></i>
+                            </a>
+                        </td>
+                        <td id="td_<?php echo $permisos[perdet_codigo]?>_d">
+                            <a href="javascript:void(0);" onclick="controler('ver=1&dmn=<?php echo $idMenu;?>&act=3&codigo=<?php echo $permisos[perdet_codigo]?>&acc=<?php echo $acc_d;?>&perm=d&submen=<?php echo $resultado[subm_codigo]?>&perf=<?php echo $_POST[idperfil];?>&menu=<?php echo $row[menu_codigo];?>','td_<?php echo $permisos[perdet_codigo]?>_d','')">
+                                <i class="material-icons" style="color:<?php echo $color_d;?>"><?php echo $icon_d;?></i>
+                            </a>
+                        </td>
+                        <td id="td_<?php echo $permisos[perdet_codigo]?>_i">
+                            <a href="javascript:void(0);" onclick="controler('ver=1&dmn=<?php echo $idMenu;?>&act=3&codigo=<?php echo $permisos[perdet_codigo]?>&acc=<?php echo $acc_i;?>&perm=i&submen=<?php echo $resultado[subm_codigo]?>&perf=<?php echo $_POST[idperfil];?>&menu=<?php echo $row[menu_codigo];?>','td_<?php echo $permisos[perdet_codigo]?>_i','')">
+                                <i class="material-icons" style="color:<?php echo $color_i;?>"><?php echo $icon_i;?></i>
+                            </a>
+                        </td>
+                        <td id="td_<?php echo $permisos[perdet_codigo]?>_p">
+                            <a href="javascript:void(0);" onclick="controler('ver=1&dmn=<?php echo $idMenu;?>&act=3&codigo=<?php echo $permisos[perdet_codigo]?>&acc=<?php echo $acc_p;?>&perm=p&submen=<?php echo $resultado[subm_codigo]?>&perf=<?php echo $_POST[idperfil];?>&menu=<?php echo $row[menu_codigo];?>','td_<?php echo $permisos[perdet_codigo]?>_p','')">
+                                <i class="material-icons" style="color:<?php echo $color_p;?>"><?php echo $icon_p;?></i>
+                            </a>
+                        </td>
+                    </tr>
+<?php
+                        }
                     }
-?>
-                    </table>
-                </div>
+                    ?>
+                </table>
             </div>
         </div>
-    </div>
+</div>                  

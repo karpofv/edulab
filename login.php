@@ -1,71 +1,57 @@
 <?php
 include("includes/conf/parametros.php");
 include("includes/layout/headp.php");
-include("includes/layout/headerp.php");
 ?>
-<div class="row container-login">
-    <div class="col-sm-12">
-        <?php
-    if($_GET[info]!=""){
-        $error_msg = $info[$_GET[info]];
+    <main role="main" id="MainContent">
+        <div class="section container">
+            <div class="row">
+                <div class="col s12 m6 offset-m3">
+                    <div class="card login-wrapper">
+                        <div class="card-content">
+                            <div id="CustomerLoginForm">
+                                <?php
+                                    if($_GET[info]!=""){
+                                        $error_msg = $info[$_GET[info]];
+                                ?>
+                                <div class="row animated flipInY">
+                                    <div class="alert alert-error-login alert-dismissable">
+                                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                        <?php echo $error_msg;?>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
+                                        <form method="post" action="index2.php" id="customer_login" accept-charset="UTF-8">
+                                            <input type="hidden" value="customer_login" name="form_type" />
+                                            <input type="hidden" name="utf8" value="✓" />
+                                            <h4 class="center">Ingreso</h4>
+                                            <div class="input-field">
+                                                <label for="CustomerEmail">Usuario</label>
+                                                <input type="text" name="user" id="user" class="" spellcheck="false" autocomplete="off" autocapitalize="off" autofocus> </div>
+                                            <div class="input-field">
+                                                <label for="CustomerPassword">Contraseña</label>
+                                                <input type="password" name="pass" id="pass" class=""> </div>
+                                            <input type="submit" class="btn-large z-depth-0" value="Ingresa"> <a href="#recover" id="RecoverPassword">¿Olvidaste tu contraseña?</a> </form>
+                            </div>
+                            <div id="RecoverPasswordForm" class="hide">
+                                <h4 class="center">Recuperar contraseña</h4>
+                                <p>Te enviaremos un correo con los datos para cambiar tu contraseña.</p>
+                                <form method="post" action="/account/recover" accept-charset="UTF-8">
+                                    <input type="hidden" value="recover_customer_password" name="form_type" />
+                                    <input type="hidden" name="utf8" value="✓" />
+                                    <div class="input-field">
+                                        <label for="RecoverEmail">Correo electrónico</label>
+                                        <input type="email" name="email" id="RecoverEmail" spellcheck="false" autocomplete="off" autocapitalize="off"> </div>
+                                    <input type="submit" class="btn-large z-depth-0" value="Enviar"> <a href="#" id="HideRecoverPasswordLink">Cancelar</a> </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-success hide" id="ResetSuccess"> We&#39;ve sent you an email with a link to update your password. </div>
+    </main>
+    <?php
+    include("includes/layout/footp.php");
     ?>
-            <div class="row animated flipInY">
-                <div class="alert alert-error-login alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <?php echo $error_msg;?>
-                </div>
-            </div>
-            <?php
-    }
-    ?>
-    </div>
-    <div class="col-xs-12 col-sm-6">
-        <form action="http://lavitrinaonline.com/inicio-sesion" method="post" id="create-account_form" class="box">
-            <h3 class="page-subheading">Crear una cuenta</h3>
-            <div class="form_content clearfix">
-                <p>Escriba su dirección de correo electrónico para crear una cuenta.</p>
-                <div class="alert alert-danger" id="create_account_error" style="display:none"></div>
-                <div class="form-group">
-                    <label for="email_create">Dirección de correo electrónico</label>
-                    <input type="email" class="is_required validate account_input form-control" data-validate="isEmail" id="email_create" name="email_create" value="">
-                </div>
-                <div class="submit">
-                    <input type="hidden" class="hidden" name="back" value="my-account"> <button class="btn btn-default button button-medium exclusive" type="submit" id="SubmitCreate" name="SubmitCreate">
-							<span>
-								<i class="icon-user left"></i>
-								Crear una cuenta
-							</span>
-						</button>
-                    <input type="hidden" class="hidden" name="SubmitCreate" value="Crear una cuenta">
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="col-xs-12 col-sm-6">
-        <form action="index2.php" method="post" id="login_form" class="box">
-            <h3 class="page-subheading">¿Ya está registrado?</h3>
-            <div class="form_content clearfix">
-                <div class="form-group">
-                    <label for="email">Correo electrónico</label>
-                    <input class="is_required validate account_input form-control" data-validate="isEmail" type="email" id="user" name="user" value="">
-                </div>
-                <div class="form-group">
-                    <label for="passwd">Contraseña</label>
-                    <input class="is_required validate account_input form-control" type="password" data-validate="isPasswd" id="pass" name="pass" value="">
-                </div>
-                <p class="lost_password form-group"><a href="http://lavitrinaonline.com/recuperacion-contraseña" title="Recuperar la contraseña" rel="nofollow">¿Olvidó su contraseña?</a></p>
-                <p class="submit">
-                    <input type="hidden" class="hidden" name="back" value="my-account"> <button type="submit" id="SubmitLogin" name="SubmitLogin" class="button btn btn-default button-medium">
-							<span>
-								<i class="icon-lock left"></i>
-								Iniciar sesión
-							</span>
-						</button>
-                </p>
-            </div>
-        </form>
-    </div>
-</div>
-<?php
-include("includes/layout/footp.php");
-?>

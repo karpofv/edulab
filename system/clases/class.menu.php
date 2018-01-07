@@ -6,9 +6,9 @@ Class Menu {
     <ul style="list-style: none;">
         <?php
         if($nivel==1){
-            $consulsubmenu = paraTodos::arrayConsulta("*","menu_submenu sm, perfiles_det pd","sm.subm_codigo=pd.perdet_submcodigo and subm_menucodigo=$codigo and subm_status=1 and subm_nivel=1 and perdet_S=1");
+            $consulsubmenu = paraTodos::arrayConsulta("distinct sm.*","menu_submenu sm, perfiles_det pd","sm.subm_codigo=pd.perdet_submcodigo and subm_menucodigo=$codigo and subm_status=1 and subm_nivel=1 and perdet_S=1 and perdet_perfcodigo=$_SESSION[usuario_perfil]");
         } else {
-            $consulsubmenu = paraTodos::arrayConsulta("*","menu_submenu sm, perfiles_det pd","sm.subm_codigo=pd.perdet_submcodigo and subm_conexion=$subc and subm_status=1 and subm_nivel=$nivel and perdet_S=1");
+            $consulsubmenu = paraTodos::arrayConsulta("distinct sm.*","menu_submenu sm, perfiles_det pd","sm.subm_codigo=pd.perdet_submcodigo and subm_conexion=$subc and subm_status=1 and subm_nivel=$nivel and perdet_S=1 and perdet_perfcodigo=$_SESSION[usuario_perfil]");
         }
         foreach($consulsubmenu as $submenu){
             if (strlen($submenu['subm_descripcion']) > 25) {
@@ -18,8 +18,8 @@ Class Menu {
             }
 ?>
             <li>
-                <a href="#" onclick="controler('dmn=<?php echo $submenu['subm_codigo'];?>&ver=2', 'verContenido');">
-                    <i class="icon fa <?php echo $submenu[subm_icono]?>"></i>
+                <a href="#" onclick="controler('dmn=<?php echo $submenu['subm_codigo'];?>&ver=1', 'verContenido');">
+                    <i class="material-icons"><?php echo $submenu[subm_icono]?></i>
                     <span><?php echo $submenuli;?></span>
                 </a>
                 <?php
@@ -34,7 +34,7 @@ Class Menu {
     }
     function menuprinc() {
         /*Se consulta menu principal*/
-        $consulmenu = paraTodos::arrayConsulta("distinct m.*","menu m, perfiles_det pd","m.menu_codigo=pd.perdet_menucodigo and m.menu_status=1 and perdet_S=1");
+        $consulmenu = paraTodos::arrayConsulta("distinct m.*","menu m, perfiles_det pd","m.menu_codigo=pd.perdet_menucodigo and m.menu_status=1 and perdet_S=1 and perdet_perfcodigo=$_SESSION[usuario_perfil]");
         foreach($consulmenu as $menu){
             if (strlen($menu['menu_descripcion']) > 14) {
               $menuli = substr($menu['menu_descripcion'],0,14).'... ';
@@ -42,22 +42,19 @@ Class Menu {
               $menuli = $menu['menu_descripcion'];
             }
             ?>
-<li class="dropdown menu-item"> 
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon <?php echo $menu['menu_icono']?>" aria-hidden="true"></i><?php echo $menuli;?></a>
-    <ul class="dropdown-menu mega-menu">
-        <li class="yamm-content">
-            <div class="row">
-                <div class="col-sm-12">
-                    <ul class="links list-unstyled">        
-                        <?php
-            Menu::submenu($menu['menu_codigo'], 0, 0);
-                        ?>
-                    </ul>
-                </div>
+        <li class="bold">
+            <a class="collapsible-header waves-effect waves-cyan active">
+                <i class="material-icons" style="color:#80006c;"><?php echo $menu['menu_icono']?></i>
+                <span class="nav-text"><?php echo $menuli;?></span>
+            </a>
+            <div class="collapsible-body">
+                <ul>
+                    <?php
+                    Menu::submenu($menu['menu_codigo'], 0, 0);
+                ?>
+                </ul>
             </div>
         </li>
-    </ul>
-</li>
 
         <?php
         }

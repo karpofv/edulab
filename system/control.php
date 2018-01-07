@@ -2,6 +2,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', false);
     ini_set('display_startup_errors', false);
+
     require("../includes/conf/parametros.php");
     require("../includes/conf/firewall.php");
     require("../includes/conexion.php");
@@ -37,13 +38,13 @@
         $modelo = $rowenlace[$menusuf."modelo"];
         $jquery = $rowenlace[$menusuf."jquery"];
     }
-    if($modelo!=""){
+    if($modelo!="" and $_POST[actd]==""){
         include($modelo);
     }
     if($enlace!=""){
         include($enlace);
     }
-    if($jquery!=""){
+    if($jquery!="" and $_POST[actd]==""){
         ?>
     <script>
         <?php include($jquery);?>
