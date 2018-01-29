@@ -4,8 +4,10 @@
     <div class="navbar-fixed">
         <nav class="navbar-color gradient-45deg-blue-grey-blue gradient-shadow">
             <div class="nav-wrapper">
-                <div class="header-search-wrapper hide-on-med-and-down sideNav-lock"> <i class="material-icons">search</i>
-                    <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explora Edulab" /> </div>
+                <?php
+                    /*<div class="header-search-wrapper hide-on-med-and-down sideNav-lock" on> <a href="javascript:void(0);" onclick="controler('dmn=14&ver=2&busc='+$('#search').val(),'ventanaVer');"><i class="material-icons">search</i></a>
+                    <input id="search" type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explora Edulab" /> </div>*/
+                        ?>
                 <ul class="right hide-on-med-and-down">
                     <li>
                         <a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"> <i class="material-icons">settings_overscan</i> </a>
@@ -29,7 +31,7 @@
                 <!-- profile-dropdown -->
                 <ul id="profile-dropdown" class="dropdown-content">
                     <li>
-                        <a href="#" class="grey-text text-darken-1"> <i class="material-icons">face</i> Perfil</a>
+                        <a href="javascript:void(0)" onclick="controler('dmn=15&ver=1','verContenido');" class="grey-text text-darken-1"> <i class="material-icons">face</i> Perfil</a>
                     </li>
                     <li class="divider"></li>
                     <li>

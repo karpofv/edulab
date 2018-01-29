@@ -5,6 +5,7 @@
     $content = $_POST[content];
     if($opcion!=""){
         if($opcion==1){
+            paraTodos::arrayInserte("avano_objcodigo,avano_contenido,avano_percodigo", "avance_objetivos", "$obj,$content,$_SESSION[codido_persona]");
             $contenido = paraTodos::arrayConsulta("*", "contenido","cont_codigo=$content and cont_stcodigo=1");            
             $contenido_descrip = str_replace("%#37;#39;", "'", $contenido[0][cont_descripcion]);
             $contenido_descrip = str_replace("%#37;nbsp;", "  ", $contenido_descrip);            

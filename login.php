@@ -32,7 +32,11 @@ include("includes/layout/headp.php");
                                             <div class="input-field">
                                                 <label for="CustomerPassword">Contraseña</label>
                                                 <input type="password" name="pass" id="pass" class=""> </div>
-                                            <input type="submit" class="btn-large z-depth-0" value="Ingresa"> <a href="#recover" id="RecoverPassword">¿Olvidaste tu contraseña?</a> </form>
+                                            <input type="submit" class="btn-large z-depth-0" value="Ingresa">
+                                            <?php
+                                            /*<a href="#recover" id="RecoverPassword">¿Olvidaste tu contraseña?</a>*/
+                                            ?>
+                                </form>
                             </div>
                             <div id="RecoverPasswordForm" class="hide">
                                 <h4 class="center">Recuperar contraseña</h4>
