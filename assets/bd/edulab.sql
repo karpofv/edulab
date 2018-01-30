@@ -10,6 +10,24 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+-- Volcando estructura para tabla edulab.avance_objetivos
+CREATE TABLE IF NOT EXISTS `avance_objetivos` (
+  `avano_codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `avano_objcodigo` int(11) NOT NULL,
+  `avano_contenido` int(11) NOT NULL,
+  `avano_percodigo` int(11) NOT NULL,
+  PRIMARY KEY (`avano_codigo`),
+  UNIQUE KEY `avano_objcodigo` (`avano_contenido`,`avano_percodigo`,`avano_objcodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla edulab.avance_objetivos: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `avance_objetivos` DISABLE KEYS */;
+INSERT IGNORE INTO `avance_objetivos` (`avano_codigo`, `avano_objcodigo`, `avano_contenido`, `avano_percodigo`) VALUES
+	(1, 9, 10, 10),
+	(2, 9, 11, 10);
+/*!40000 ALTER TABLE `avance_objetivos` ENABLE KEYS */;
+
+
 -- Volcando estructura para tabla edulab.categoria
 CREATE TABLE IF NOT EXISTS `categoria` (
   `cat_codigo` int(11) NOT NULL AUTO_INCREMENT,
@@ -76,13 +94,14 @@ CREATE TABLE IF NOT EXISTS `curso` (
   CONSTRAINT `FK_curso_persona` FOREIGN KEY (`cur_percodigo`) REFERENCES `persona` (`per_codigo`),
   CONSTRAINT `FK_curso_tools_grados` FOREIGN KEY (`cur_gracodigo`) REFERENCES `tools_grados` (`gra_codigo`),
   CONSTRAINT `FK_curso_tools_status` FOREIGN KEY (`cur_estcodigo`) REFERENCES `tools_status` (`st_codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla edulab.curso: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
 INSERT IGNORE INTO `curso` (`cur_codigo`, `cur_catcodigo`, `cur_gracodigo`, `cur_descripcion`, `cur_percodigo`, `cur_resumen`, `cur_imagen`, `cur_estcodigo`) VALUES
-	(1, 1, 3, 'Android avanzado', 1, 'No programming experience? No Problem! Start developing Android apps today.', '', 3),
-	(19, 1, 3, 'sdasdsss', 1, 'No programming experience?', 'standar.png', 3);
+	(1, 1, 3, 'Android avanzado', 1, 'No programming experience? No Problem! Start developing Android apps today.', 'standar.png', 1),
+	(19, 1, 3, 'sdasdsss', 1, 'No programming experience?', 'standar.png', 1),
+	(20, 2, 1, 'Programación Básica en Html', 1, 'EL objetivo de este curso es comprender los fundamentos básicos de programación en html y sus instrucciones elementales.', 'standar.png', 1);
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 
 
@@ -99,13 +118,30 @@ CREATE TABLE IF NOT EXISTS `curso_clase` (
   KEY `FK_curso_clase_curso` (`curc_curcodigo`),
   CONSTRAINT `FK__tools_status` FOREIGN KEY (`curc_stcodigo`) REFERENCES `tools_status` (`st_codigo`),
   CONSTRAINT `FK_curso_clase_curso` FOREIGN KEY (`curc_curcodigo`) REFERENCES `curso` (`cur_codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla edulab.curso_clase: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla edulab.curso_clase: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `curso_clase` DISABLE KEYS */;
 INSERT IGNORE INTO `curso_clase` (`curc_codigo`, `curc_curcodigo`, `curc_descripcion`, `curc_orden`, `curc_stcodigo`) VALUES
-	(5, 1, ' Clase 2: control de flujo y condicionales1.', 1, 1);
+	(5, 1, ' Clase 2: control de flujo y condicionales1.', 1, 1),
+	(6, 20, 'Programación Básica en HtmlH', 1, 1);
 /*!40000 ALTER TABLE `curso_clase` ENABLE KEYS */;
+
+
+-- Volcando estructura para tabla edulab.curso_inscrito
+CREATE TABLE IF NOT EXISTS `curso_inscrito` (
+  `curi_codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `curi_curcodigo` int(11) NOT NULL DEFAULT '0',
+  `curi_percodigo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`curi_codigo`),
+  UNIQUE KEY `curi_curcodigo` (`curi_percodigo`,`curi_curcodigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla edulab.curso_inscrito: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `curso_inscrito` DISABLE KEYS */;
+INSERT IGNORE INTO `curso_inscrito` (`curi_codigo`, `curi_curcodigo`, `curi_percodigo`) VALUES
+	(1, 1, 10);
+/*!40000 ALTER TABLE `curso_inscrito` ENABLE KEYS */;
 
 
 -- Volcando estructura para tabla edulab.menu
@@ -115,15 +151,16 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `menu_icono` varchar(50) DEFAULT NULL,
   `menu_status` int(11) DEFAULT '0',
   PRIMARY KEY (`menu_codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla edulab.menu: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla edulab.menu: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
 INSERT IGNORE INTO `menu` (`menu_codigo`, `menu_descripcion`, `menu_icono`, `menu_status`) VALUES
 	(1, 'Sistema', 'verified_user', 1),
 	(2, 'Configuraciones', 'fa fa-cog', 1),
 	(3, 'Publicar', 'file_upload', 1),
-	(4, 'Mis cursos', 'developer_board', 1);
+	(4, 'Mis cursos', 'developer_board', 1),
+	(5, 'Catálogo', 'fa fa-book', 1);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 
 
@@ -160,9 +197,9 @@ CREATE TABLE IF NOT EXISTS `menu_submenu` (
   PRIMARY KEY (`subm_codigo`),
   KEY `FK_menu_submenu_menu` (`subm_menucodigo`),
   CONSTRAINT `FK_menu_submenu_menu` FOREIGN KEY (`subm_menucodigo`) REFERENCES `menu` (`menu_codigo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla edulab.menu_submenu: ~10 rows (aproximadamente)
+-- Volcando datos para la tabla edulab.menu_submenu: ~15 rows (aproximadamente)
 /*!40000 ALTER TABLE `menu_submenu` DISABLE KEYS */;
 INSERT IGNORE INTO `menu_submenu` (`subm_codigo`, `subm_menucodigo`, `subm_nivel`, `subm_descripcion`, `subm_icono`, `subm_url1`, `subm_url2`, `subm_url3`, `subm_url4`, `subm_url5`, `subm_url6`, `subm_url7`, `subm_url8`, `subm_url9`, `subm_url10`, `subm_url11`, `subm_url12`, `subm_url13`, `subm_url14`, `subm_url15`, `subm_url16`, `subm_url17`, `subm_url18`, `subm_url19`, `subm_url20`, `subm_modelo`, `subm_jquery`, `subm_status`) VALUES
 	(1, 1, 1, 'Crear usuarios', 'keyboard_arrow_right', 'sistema/adminsistema/usuarios/usuarios.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sistema/adminsistema/usuarios/modelo.php', 'sistema/adminsistema/usuarios/script.js', 1),
@@ -175,7 +212,11 @@ INSERT IGNORE INTO `menu_submenu` (`subm_codigo`, `subm_menucodigo`, `subm_nivel
 	(9, 4, 0, 'Contenido', 'keyboard_arrow_right', 'sistema/contenido/contenido.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sistema/contenido/modelo.php', 'sistema/contenido/modelo.php', 'sistema/contenido/script.js', 1),
 	(11, 4, 0, 'Vista previa', 'keyboard_arrow_right', 'sistema/curso/preview/preview.php', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sistema/curso/preview/modelo.php', 'sistema/curso/preview/modelo.php', 'sistema/curso/preview/script.js', 1),
 	(12, 4, 0, 'Vista Contenido', 'keyboard_arrow_right', 'sistema/cursar/curso.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sistema/cursar/modelo.php', 'sistema/cursar/modelo.php', 'sistema/cursar/script.js', 1),
-	(13, 1, 1, 'Editor', 'keyboard_arrow_right', 'sistema/editor/editor.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sistema/editor/modelo.php', 'sistema/editor/modelo.php', 'sistema/editor/script.js', 1);
+	(13, 1, 1, 'Editor', 'keyboard_arrow_right', 'sistema/editor/editor.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sistema/editor/modelo.php', 'sistema/editor/modelo.php', 'sistema/editor/script.js', 1),
+	(14, 2, 0, 'Busqueda', NULL, 'sistema/busqueda.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+	(15, 1, 0, 'Perfil de usuario', NULL, 'sistema/perfil/perfil.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sistema/perfil/modelo.php', 'sistema/perfil/script.js', 1),
+	(16, 5, 1, 'Cursos públicados', 'keyboard_arrow_right', 'sistema/class_categoria/categoria.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sistema/class_categoria/modelo.php', 'sistema/class_categoria/script.js', 1),
+	(17, 5, 0, 'Cursos por categoria', NULL, 'sistema/class_cursos/cursos.php', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'sistema/class_cursos/modelo.php', 'sistema/class_cursos/script.js', 1);
 /*!40000 ALTER TABLE `menu_submenu` ENABLE KEYS */;
 
 
@@ -195,10 +236,11 @@ CREATE TABLE IF NOT EXISTS `objetivos` (
   CONSTRAINT `FK__tools_status_objetivos` FOREIGN KEY (`ob_stcodigo`) REFERENCES `tools_status` (`st_codigo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla edulab.objetivos: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla edulab.objetivos: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `objetivos` DISABLE KEYS */;
 INSERT IGNORE INTO `objetivos` (`ob_codigo`, `ob_orden`, `ob_curccodigo`, `ob_descripcion`, `ob_resumen`, `ob_stcodigo`) VALUES
-	(9, 1, 5, 'Variables y tipos de datos', 'Descubre la idea básica detrás de la programación y escribe tu primer programa Java. usar variable para almacenar y recuperar información.', 1);
+	(9, 1, 5, 'Variables y tipos de datos', 'Descubre la idea básica detrás de la programación y escribe tu primer programa Java. usar variable para almacenar y recuperar información.', 1),
+	(10, 1, 6, 'INSTRUCCIONES BASICAS', 'EL BUEN USO DE LAS INSTRUCCIONES ES ESENCIAL EN TODO LENGUAJE, FUDAMENTALMENTE CONOCER SU SINTAXIS AYUDA A ENTER CLARAMENTE SU FUNCIONABILIDAD.\nEJEMPLO\n<HEAD> </HEAD> PERMITE INDICAR EN ENCABEZADO DE UN SITIO WEB.\n....', 1);
 /*!40000 ALTER TABLE `objetivos` ENABLE KEYS */;
 
 
@@ -207,13 +249,14 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
   `perf_codigo` int(11) NOT NULL AUTO_INCREMENT,
   `perf_descripcion` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`perf_codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla edulab.perfiles: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla edulab.perfiles: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `perfiles` DISABLE KEYS */;
 INSERT IGNORE INTO `perfiles` (`perf_codigo`, `perf_descripcion`) VALUES
 	(1, 'GOD'),
-	(2, 'Administrador');
+	(2, 'Administrador'),
+	(3, 'Alumno');
 /*!40000 ALTER TABLE `perfiles` ENABLE KEYS */;
 
 
@@ -235,9 +278,9 @@ CREATE TABLE IF NOT EXISTS `perfiles_det` (
   CONSTRAINT `FK_perfiles_det_menu` FOREIGN KEY (`perdet_menucodigo`) REFERENCES `menu` (`menu_codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_perfiles_det_menu_submenu` FOREIGN KEY (`perdet_submcodigo`) REFERENCES `menu_submenu` (`subm_codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_perfiles_det_perfiles` FOREIGN KEY (`perdet_perfcodigo`) REFERENCES `perfiles` (`perf_codigo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla edulab.perfiles_det: ~7 rows (aproximadamente)
+-- Volcando datos para la tabla edulab.perfiles_det: ~11 rows (aproximadamente)
 /*!40000 ALTER TABLE `perfiles_det` DISABLE KEYS */;
 INSERT IGNORE INTO `perfiles_det` (`perdet_codigo`, `perdet_perfcodigo`, `perdet_menucodigo`, `perdet_submcodigo`, `perdet_S`, `perdet_U`, `perdet_D`, `perdet_I`, `perdet_P`) VALUES
 	(1, 1, 1, 1, 1, 1, 1, 1, 1),
@@ -249,7 +292,9 @@ INSERT IGNORE INTO `perfiles_det` (`perdet_codigo`, `perdet_perfcodigo`, `perdet
 	(13, 1, 3, 6, 1, 1, 1, 1, 1),
 	(14, 2, 3, 6, 1, 1, 1, 1, 1),
 	(15, 1, 1, 13, 1, 1, 1, 1, 1),
-	(16, 2, 1, 13, 1, 1, 1, 1, 1);
+	(16, 2, 1, 13, 1, 1, 1, 1, 1),
+	(17, 2, 4, 4, 1, 1, 1, 1, 1),
+	(18, 3, 5, 16, 1, 1, 1, 1, 1);
 /*!40000 ALTER TABLE `perfiles_det` ENABLE KEYS */;
 
 
@@ -259,15 +304,21 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `per_cedula` int(11) DEFAULT NULL,
   `per_nombres` varchar(50) DEFAULT NULL,
   `per_apellidos` varchar(50) DEFAULT NULL,
+  `per_oficio` varchar(50) DEFAULT NULL,
+  `per_about` text,
+  `per_telefono` varchar(50) DEFAULT NULL,
+  `per_correo` varchar(50) DEFAULT NULL,
+  `per_fecnac` date DEFAULT NULL,
   PRIMARY KEY (`per_codigo`),
   UNIQUE KEY `per_cedula` (`per_cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla edulab.persona: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla edulab.persona: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT IGNORE INTO `persona` (`per_codigo`, `per_cedula`, `per_nombres`, `per_apellidos`) VALUES
-	(1, 123123, 'admin', 'admin'),
-	(3, 19191493, 'GABRIEL ANATOLY', 'ROJAS');
+INSERT IGNORE INTO `persona` (`per_codigo`, `per_cedula`, `per_nombres`, `per_apellidos`, `per_oficio`, `per_about`, `per_telefono`, `per_correo`, `per_fecnac`) VALUES
+	(1, 123123, 'admin', 'admin', 'Administrador', 'Soy el administrador', '0412-4289536', '', '1989-06-15'),
+	(3, 19191493, 'GABRIEL ANATOLY', 'ROJAS', NULL, NULL, NULL, NULL, NULL),
+	(10, 19191491, 'gabriel anatoly', 'rojas', 'programador', 'soy programador.', '04124289536', 'karpofv.89@gmail.com', '1989-06-15');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 
 
@@ -342,14 +393,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   UNIQUE KEY `Cedula_2` (`Tipo`,`Cedula`),
   KEY `Tipo` (`Cedula`,`Tipo`,`Usuario`),
   KEY `Cedula` (`Codigo`,`Usuario`,`Cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci CHECKSUM=1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci CHECKSUM=1;
 
--- Volcando datos para la tabla edulab.usuarios: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla edulab.usuarios: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT IGNORE INTO `usuarios` (`id`, `Cedula`, `Usuario`, `contrasena`, `Tipo`, `Nivel`, `Stilo`, `theme_color`, `Codigo`, `Registro`, `Fecha`, `Img_perfil`, `Observacion`) VALUES
 	(1, 12345, 'GOD', 'a1b995eb2627f17bfd5fcb1de8533c62', 'GOD', '1', 0, '', NULL, NULL, '0000-00-00 00:00:00', '19191493.jpg', NULL),
 	(5, 123123, 'admin', 'a1b995eb2627f17bfd5fcb1de8533c62', 'Empleado', '2', 0, '', NULL, NULL, '0000-00-00 00:00:00', 'unelllez.png', NULL),
-	(7, 19191493, 'rojasgb', 'a1b995eb2627f17bfd5fcb1de8533c62', 'Empleado', '2', 0, '', NULL, NULL, '0000-00-00 00:00:00', '', NULL);
+	(7, 19191493, 'rojasgb', 'a1b995eb2627f17bfd5fcb1de8533c62', 'Empleado', '2', 0, '', NULL, NULL, '0000-00-00 00:00:00', '', NULL),
+	(21, 19191491, 'karpofv', 'a1b995eb2627f17bfd5fcb1de8533c62', 'Alumno', '3', 0, '', NULL, '1', '2018-01-28 17:52:49', '', NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

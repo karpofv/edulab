@@ -1,8 +1,8 @@
 <?php
-    $ruta_base = "http://kanatoly.ddns.net/edulab";
-    $redir = "http://kanatoly.ddns.net/edulab/login.php";
+    $ruta_base = "http://localhost/edulab";
+    $redir = "http://localhost/edulab/login.php";
     $auth_table = "usuarios";
-    $img_perfil = "http://kanatoly.ddns.net/edulab/assets/img/img_perfil";
+    $img_perfil = "http://localhost/edulab/assets/img/img_perfil";
 
 //Errores
     $info[0]="No se pudo conectar con la bd";
